@@ -1,0 +1,12 @@
+D:\VisualStudioProjects\OnlineStoreRestApi\bin\OnlineStoreRestApi.dll.config
+D:\VisualStudioProjects\OnlineStoreRestApi\bin\OnlineStoreRestApi.dll
+D:\VisualStudioProjects\OnlineStoreRestApi\bin\OnlineStoreRestApi.pdb
+D:\VisualStudioProjects\OnlineStoreRestApi\bin\EntityFramework.dll
+D:\VisualStudioProjects\OnlineStoreRestApi\bin\EntityFramework.SqlServer.dll
+D:\VisualStudioProjects\OnlineStoreRestApi\bin\EntityFramework.xml
+D:\VisualStudioProjects\OnlineStoreRestApi\bin\EntityFramework.SqlServer.xml
+D:\VisualStudioProjects\OnlineStoreRestApi\obj\Debug\OnlineStoreRestApi.csprojAssemblyReference.cache
+D:\VisualStudioProjects\OnlineStoreRestApi\obj\Debug\OnlineStoreRestApi.csproj.CoreCompileInputs.cache
+D:\VisualStudioProjects\OnlineStoreRestApi\obj\Debug\OnlineStoreRestApi.csproj.CopyComplete
+D:\VisualStudioProjects\OnlineStoreRestApi\obj\Debug\OnlineStoreRestApi.dll
+D:\VisualStudioProjects\OnlineStoreRestApi\obj\Debug\OnlineStoreRestApi.pdb

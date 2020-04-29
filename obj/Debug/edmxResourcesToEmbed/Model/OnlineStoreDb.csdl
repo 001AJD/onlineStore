@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_onlineStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_address">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_customer" Relationship="Self.FK__tbl_addre__custo__60A75C0F" FromRole="tbl_address" ToRole="tbl_customer" />
+    <NavigationProperty Name="tbl_customer1" Relationship="Self.FK__tbl_custo__addre__619B8048" FromRole="tbl_address" ToRole="tbl_customer" />
+    <NavigationProperty Name="tbl_customer2" Relationship="Self.fkcustid" FromRole="tbl_address" ToRole="tbl_customer" />
+    <NavigationProperty Name="tbl_orders" Relationship="db_onlineStoreModel.fk_addressId" FromRole="tbl_address" ToRole="tbl_orders" />
+  </EntityType>
+  <EntityType Name="tbl_cart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="tbl_customer" Relationship="Self.FK__tbl_cart__custom__02FC7413" FromRole="tbl_cart" ToRole="tbl_customer" />
+    <NavigationProperty Name="tbl_products" Relationship="Self.FK__tbl_cart__produc__03F0984C" FromRole="tbl_cart" ToRole="tbl_products" />
+  </EntityType>
+  <EntityType Name="tbl_customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="address_id" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_address" Relationship="Self.FK__tbl_addre__custo__60A75C0F" FromRole="tbl_customer" ToRole="tbl_address" />
+    <NavigationProperty Name="tbl_address1" Relationship="Self.FK__tbl_custo__addre__619B8048" FromRole="tbl_customer" ToRole="tbl_address" />
+    <NavigationProperty Name="tbl_address2" Relationship="Self.fkcustid" FromRole="tbl_customer" ToRole="tbl_address" />
+    <NavigationProperty Name="tbl_cart" Relationship="Self.FK__tbl_cart__custom__02FC7413" FromRole="tbl_customer" ToRole="tbl_cart" />
+    <NavigationProperty Name="tbl_orders" Relationship="Self.fk_custid" FromRole="tbl_customer" ToRole="tbl_orders" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_order_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_id" Type="Int32" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="tbl_orders" Relationship="Self.FK__tbl_order__order__73BA3083" FromRole="tbl_order_details" ToRole="tbl_orders" />
+    <NavigationProperty Name="tbl_products" Relationship="Self.FK__tbl_order__produ__74AE54BC" FromRole="tbl_order_details" ToRole="tbl_products" />
+  </EntityType>
+  <EntityType Name="tbl_orders">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="address_id" Type="Int32" />
+    <Property Name="order_date" Type="DateTime" Precision="0" />
+    <Property Name="payment_status" Type="Binary" MaxLength="1" FixedLength="true" />
+    <NavigationProperty Name="tbl_customer" Relationship="Self.fk_custid" FromRole="tbl_orders" ToRole="tbl_customer" />
+    <NavigationProperty Name="tbl_order_details" Relationship="Self.FK__tbl_order__order__73BA3083" FromRole="tbl_orders" ToRole="tbl_order_details" />
+    <NavigationProperty Name="tbl_sales" Relationship="Self.FK__tbl_sales__order__778AC167" FromRole="tbl_orders" ToRole="tbl_sales" />
+    <NavigationProperty Name="tbl_address" Relationship="db_onlineStoreModel.fk_addressId" FromRole="tbl_orders" ToRole="tbl_address" />
+  </EntityType>
+  <EntityType Name="tbl_products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="available_units" Type="Int32" />
+    <NavigationProperty Name="tbl_cart" Relationship="Self.FK__tbl_cart__produc__03F0984C" FromRole="tbl_products" ToRole="tbl_cart" />
+    <NavigationProperty Name="tbl_order_details" Relationship="Self.FK__tbl_order__produ__74AE54BC" FromRole="tbl_products" ToRole="tbl_order_details" />
+  </EntityType>
+  <EntityType Name="tbl_sales">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_id" Type="Int32" />
+    <Property Name="amount" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="tbl_orders" Relationship="Self.FK__tbl_sales__order__778AC167" FromRole="tbl_sales" ToRole="tbl_orders" />
+  </EntityType>
+  <Association Name="FK__tbl_addre__custo__60A75C0F">
+    <End Role="tbl_customer" Type="Self.tbl_customer" Multiplicity="0..1" />
+    <End Role="tbl_address" Type="Self.tbl_address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_address">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_custo__addre__619B8048">
+    <End Role="tbl_address" Type="Self.tbl_address" Multiplicity="0..1" />
+    <End Role="tbl_customer" Type="Self.tbl_customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_address">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_customer">
+        <PropertyRef Name="address_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkcustid">
+    <End Role="tbl_customer" Type="Self.tbl_customer" Multiplicity="0..1" />
+    <End Role="tbl_address" Type="Self.tbl_address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_address">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_cart__custom__02FC7413">
+    <End Role="tbl_customer" Type="Self.tbl_customer" Multiplicity="0..1" />
+    <End Role="tbl_cart" Type="Self.tbl_cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_cart">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_cart__produc__03F0984C">
+    <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="0..1" />
+    <End Role="tbl_cart" Type="Self.tbl_cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_cart">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_custid">
+    <End Role="tbl_customer" Type="Self.tbl_customer" Multiplicity="0..1" />
+    <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_orders">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_order__order__73BA3083">
+    <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="0..1" />
+    <End Role="tbl_order_details" Type="Self.tbl_order_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_orders">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_order_details">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_order__produ__74AE54BC">
+    <End Role="tbl_products" Type="Self.tbl_products" Multiplicity="0..1" />
+    <End Role="tbl_order_details" Type="Self.tbl_order_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_order_details">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_sales__order__778AC167">
+    <End Role="tbl_orders" Type="Self.tbl_orders" Multiplicity="0..1" />
+    <End Role="tbl_sales" Type="Self.tbl_sales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_orders">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_sales">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_onlineStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tbl_address" EntityType="Self.tbl_address" />
+    <EntitySet Name="tbl_cart" EntityType="Self.tbl_cart" />
+    <EntitySet Name="tbl_customer" EntityType="Self.tbl_customer" />
+    <EntitySet Name="tbl_order_details" EntityType="Self.tbl_order_details" />
+    <EntitySet Name="tbl_orders" EntityType="Self.tbl_orders" />
+    <EntitySet Name="tbl_products" EntityType="Self.tbl_products" />
+    <EntitySet Name="tbl_sales" EntityType="Self.tbl_sales" />
+    <AssociationSet Name="FK__tbl_addre__custo__60A75C0F" Association="Self.FK__tbl_addre__custo__60A75C0F">
+      <End Role="tbl_customer" EntitySet="tbl_customer" />
+      <End Role="tbl_address" EntitySet="tbl_address" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_custo__addre__619B8048" Association="Self.FK__tbl_custo__addre__619B8048">
+      <End Role="tbl_address" EntitySet="tbl_address" />
+      <End Role="tbl_customer" EntitySet="tbl_customer" />
+    </AssociationSet>
+    <AssociationSet Name="fkcustid" Association="Self.fkcustid">
+      <End Role="tbl_customer" EntitySet="tbl_customer" />
+      <End Role="tbl_address" EntitySet="tbl_address" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_cart__custom__02FC7413" Association="Self.FK__tbl_cart__custom__02FC7413">
+      <End Role="tbl_customer" EntitySet="tbl_customer" />
+      <End Role="tbl_cart" EntitySet="tbl_cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_cart__produc__03F0984C" Association="Self.FK__tbl_cart__produc__03F0984C">
+      <End Role="tbl_products" EntitySet="tbl_products" />
+      <End Role="tbl_cart" EntitySet="tbl_cart" />
+    </AssociationSet>
+    <AssociationSet Name="fk_custid" Association="Self.fk_custid">
+      <End Role="tbl_customer" EntitySet="tbl_customer" />
+      <End Role="tbl_orders" EntitySet="tbl_orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_order__order__73BA3083" Association="Self.FK__tbl_order__order__73BA3083">
+      <End Role="tbl_orders" EntitySet="tbl_orders" />
+      <End Role="tbl_order_details" EntitySet="tbl_order_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_order__produ__74AE54BC" Association="Self.FK__tbl_order__produ__74AE54BC">
+      <End Role="tbl_products" EntitySet="tbl_products" />
+      <End Role="tbl_order_details" EntitySet="tbl_order_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_sales__order__778AC167" Association="Self.FK__tbl_sales__order__778AC167">
+      <End Role="tbl_orders" EntitySet="tbl_orders" />
+      <End Role="tbl_sales" EntitySet="tbl_sales" />
+    </AssociationSet>
+    <FunctionImport Name="registerCustomer">
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_addProductToCart" ReturnType="Collection(Int32)">
+      <Parameter Name="customer_id" Mode="In" Type="Int32" />
+      <Parameter Name="product_id" Mode="In" Type="Int32" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ClearCart">
+      <Parameter Name="customer_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(db_onlineStoreModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(db_onlineStoreModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_listAllProducts" ReturnType="Collection(db_onlineStoreModel.sp_listAllProducts_Result)" />
+    <FunctionImport Name="sp_PlaceOrder">
+      <Parameter Name="customer_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_RemoveItemFromCart">
+      <Parameter Name="customer_id" Mode="In" Type="Int32" />
+      <Parameter Name="product_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateProductQuantity">
+      <Parameter Name="customer_id" Mode="In" Type="Int32" />
+      <Parameter Name="product_id" Mode="In" Type="Int32" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="sp_getAllUser1" ReturnType="Collection(db_onlineStoreModel.CustomerList)" />
+    <AssociationSet Name="fk_addressId" Association="db_onlineStoreModel.fk_addressId">
+      <End Role="tbl_address" EntitySet="tbl_address" />
+      <End Role="tbl_orders" EntitySet="tbl_orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_getAllUser_Result">
+    <Property Type="String" Name="first_name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="last_name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="mobile" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_listAllProducts_Result">
+    <Property Type="String" Name="pname" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="price" Nullable="true" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="CustomerList">
+    <Property Type="String" Name="first_name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="last_name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="mobile" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="address" Nullable="false" />
+  </ComplexType>
+  <Association Name="fk_addressId">
+    <End Type="db_onlineStoreModel.tbl_address" Role="tbl_address" Multiplicity="0..1" />
+    <End Type="db_onlineStoreModel.tbl_orders" Role="tbl_orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_address">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbl_orders">
+        <PropertyRef Name="address_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="66aabf590b6749469a8bffe428c1c00b" Name="Diagram1">
+        <EntityTypeShape EntityType="db_onlineStoreModel.sysdiagram" Width="1.5" PointX="0.875" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_onlineStoreModel.tbl_address" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_onlineStoreModel.tbl_cart" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_onlineStoreModel.tbl_customer" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_onlineStoreModel.tbl_order_details" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_onlineStoreModel.tbl_orders" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_onlineStoreModel.tbl_products" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_onlineStoreModel.tbl_sales" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="db_onlineStoreModel.FK__tbl_addre__custo__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.FK__tbl_custo__addre__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.fkcustid" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.FK__tbl_cart__custom__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.FK__tbl_cart__produc__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.fk_custid" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.FK__tbl_order__order__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.FK__tbl_order__produ__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.FK__tbl_sales__order__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="db_onlineStoreModel.fk_addressId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
